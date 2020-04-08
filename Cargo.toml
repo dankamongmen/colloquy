@@ -10,10 +10,16 @@ homepage = "https://nick-black.com/dankwiki/index.php/Notcurses"
 
 [dependencies]
 libc = ">= 0.2.66"
-notcurses = ">= 1.2.5"
+#notcurses = ">= 1.2.5"
+notcurses = { path = "/home/dank/src/dankamongmen/notcurses-1.2.5/rust/notcurses" , version="1.2.5" }
 libnotcurses-sys = ">= 1.2.5"
 
 [dependencies.clap]
 version = ">= 2.33.0"
 default-features = false
 features = ["yaml", "color", "suggestions"]
+
+[dev-dependencies]
+all_asserts = ">= 1.0.0"
+serial_test = "*"
+serial_test_derive = "*"

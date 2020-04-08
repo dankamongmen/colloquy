@@ -51,3 +51,24 @@ fn main() {
         ffi::notcurses_stop(nc);
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serial_test_derive::serial; // serialize tests using notcurses
+
+    #[test]
+    #[serial]
+    fn test_msgbox() {
+        unsafe {
+            let _ = libc::setlocale(libc::LC_ALL, std::ffi::CString::new("").unwrap().as_ptr());
+            let nc = ffi::notcurses_init(std::ptr::null(), libc_stdout());
+            assert_ne!(std::ptr::null(), nc);
+            let mut dimy = 0;
+            let mut dimx = 0;
+            let _stdplane = notcurses::stddim_yx(nc, &mut dimy, &mut dimx);
+            msgbox(nc, dimy, dimx, "This ought be centered");
+            ffi::notcurses_stop(nc);
+        }
+    }
+}
