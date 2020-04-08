@@ -21,10 +21,10 @@ fn main() {
             no_winch_sighandler: false,
             no_quit_sighandlers: false,
             renderfp: std::ptr::null_mut(),
-            margin_t: 4,
-            margin_r: 4,
-            margin_b: 4,
-            margin_l: 4,
+            margin_t: 8,
+            margin_r: 8,
+            margin_b: 8,
+            margin_l: 8,
         };
         let nc = ffi::notcurses_init(&opts, libc_stdout());
         let stdplane = ffi::notcurses_stdplane(nc);
@@ -32,9 +32,11 @@ fn main() {
         let mut dimx = 0;
         ffi::ncplane_dim_yx(stdplane, &mut dimy, &mut dimx);
         if matches.is_present("msgbox") {
-            ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
+            let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
+            notcurses::ncplane_putstr(p, matches.value_of("text").unwrap());
+            notcurses::render(nc).expect("failed rendering");
         }else{
-            eprintln!("Needed a widget type");
+            eprintln!("\nNeeded a widget type");
             ffi::notcurses_stop(nc);
             std::process::exit(1);
         }
