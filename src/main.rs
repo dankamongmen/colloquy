@@ -5,6 +5,14 @@ extern {
   fn libc_stdout() -> *mut ffi::_IO_FILE;
 }
 
+fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
+    unsafe{
+        let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
+        notcurses::ncplane_putstr(p, text);
+    }
+    notcurses::render(nc).expect("failed rendering");
+}
+
 fn main() {
     use clap::{load_yaml, App};
     let yaml = load_yaml!("cli.yml");
@@ -32,9 +40,7 @@ fn main() {
         let mut dimx = 0;
         ffi::ncplane_dim_yx(stdplane, &mut dimy, &mut dimx);
         if matches.is_present("msgbox") {
-            let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
-            notcurses::ncplane_putstr(p, matches.value_of("text").unwrap());
-            notcurses::render(nc).expect("failed rendering");
+            msgbox(nc, dimy, dimx, matches.value_of("text").unwrap());
         }else{
             eprintln!("\nNeeded a widget type");
             ffi::notcurses_stop(nc);
