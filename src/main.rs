@@ -8,7 +8,15 @@ extern {
 fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
     unsafe{
         let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
-        notcurses::ncplane_putstr(p, text);
+        let mut ul = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut ur = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut bl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut br = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut hl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut vl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        ffi::cells_rounded_box(p, 0, 0, &mut ul, &mut ur, &mut bl, &mut br, &mut hl, &mut vl);
+        ffi::ncplane_perimeter(p, &ul, &ur, &bl, &br, &hl, &vl, 0);
+        ffi::ncplane_putstr(p, text);
     }
     notcurses::render(nc).expect("failed rendering");
 }
@@ -33,6 +41,7 @@ fn main() {
             margin_r: 8,
             margin_b: 8,
             margin_l: 8,
+            flags: ffi::NCOPTION_INHIBIT_SETLOCALE,
         };
         let nc = ffi::notcurses_init(&opts, libc_stdout());
         let stdplane = ffi::notcurses_stdplane(nc);
