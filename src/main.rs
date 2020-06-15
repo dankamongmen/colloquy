@@ -16,7 +16,10 @@ fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
         let mut vl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
         ffi::cells_rounded_box(p, 0, 0, &mut ul, &mut ur, &mut bl, &mut br, &mut hl, &mut vl);
         ffi::ncplane_perimeter(p, &ul, &ur, &bl, &br, &hl, &vl, 0);
-        ffi::ncplane_putstr(p, text);
+        let mut sbytes = 0;
+        let mut cols = ffi::ncplane_puttext(p, 0, ffi::ncalign_e_NCALIGN_LEFT,
+                            std::ffi::CString::new(text).expect("Bad string").as_ptr(),
+                            &mut sbytes);
     }
     notcurses::render(nc).expect("failed rendering");
 }
@@ -71,7 +74,7 @@ mod tests {
             let mut dimy = 0;
             let mut dimx = 0;
             let _stdplane = notcurses::stddim_yx(nc, &mut dimy, &mut dimx);
-            msgbox(nc, dimy, dimx, "This ought be centered");
+            msgbox(nc, dimy, dimx, "This box ought be centered");
             ffi::notcurses_stop(nc);
         }
     }
