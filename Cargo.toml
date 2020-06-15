@@ -22,5 +22,5 @@ features = ["yaml", "color", "suggestions"]
 
 [dev-dependencies]
 all_asserts = ">= 1.0.0"
-serial_test = "*"
-serial_test_derive = "*"
+serial_test = ">= 0.4.0"
+serial_test_derive = ">= 0.4.0"

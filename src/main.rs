@@ -17,7 +17,7 @@ fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
         ffi::cells_rounded_box(p, 0, 0, &mut ul, &mut ur, &mut bl, &mut br, &mut hl, &mut vl);
         ffi::ncplane_perimeter(p, &ul, &ur, &bl, &br, &hl, &vl, 0);
         let mut sbytes = 0;
-        let mut cols = ffi::ncplane_puttext(p, 0, ffi::ncalign_e_NCALIGN_LEFT,
+        let mut _cols = ffi::ncplane_puttext(p, 0, ffi::ncalign_e_NCALIGN_LEFT,
                             std::ffi::CString::new(text).expect("Bad string").as_ptr(),
                             &mut sbytes);
     }
