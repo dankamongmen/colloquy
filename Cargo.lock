@@ -117,8 +117,8 @@ dependencies = [
  "all_asserts 1.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "clap 2.33.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc 0.2.66 (registry+https://github.com/rust-lang/crates.io-index)",
- "libnotcurses-sys 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
- "notcurses 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libnotcurses-sys 1.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "notcurses 1.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "serial_test 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serial_test_derive 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -191,7 +191,7 @@ dependencies = [
 
 [[package]]
 name = "libnotcurses-sys"
-version = "1.4.2"
+version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "bindgen 0.52.0 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -232,12 +232,12 @@ dependencies = [
 
 [[package]]
 name = "notcurses"
-version = "1.4.2"
+version = "1.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 dependencies = [
  "libc 0.2.66 (registry+https://github.com/rust-lang/crates.io-index)",
  "libc-stdhandle 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "libnotcurses-sys 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)",
+ "libnotcurses-sys 1.5.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -475,12 +475,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 "checksum libc 0.2.66 (registry+https://github.com/rust-lang/crates.io-index)" = "d515b1f41455adea1313a4a2ac8a8a477634fbae63cc6100e3aebb207ce61558"
 "checksum libc-stdhandle 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "6dac2473dc28934c5e0b82250dab231c9d3b94160d91fe9ff483323b05797551"
 "checksum libloading 0.5.2 (registry+https://github.com/rust-lang/crates.io-index)" = "f2b111a074963af1d37a139918ac6d49ad1d0d5e47f72fd55388619691a7d753"
-"checksum libnotcurses-sys 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "0862b2835a85a5ce84a7371ff68ac67c32ff676b8ff244fc7b12f6f46e20f33d"
+"checksum libnotcurses-sys 1.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1f3ec50f20c6d21e88e7a83b66a12218ac95e080e67547a1cfb705ee272d1918"
 "checksum lock_api 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "79b2de95ecb4691949fea4716ca53cdbcfccb2c612e19644a8bad05edcf9f47b"
 "checksum log 0.4.8 (registry+https://github.com/rust-lang/crates.io-index)" = "14b6052be84e6b71ab17edffc2eeabf5c2c3ae1fdb464aae35ac50c67a44e1f7"
 "checksum memchr 2.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "3728d817d99e5ac407411fa471ff9800a778d88a24685968b36824eaf4bee400"
 "checksum nom 4.2.3 (registry+https://github.com/rust-lang/crates.io-index)" = "2ad2a91a8e869eeb30b9cb3119ae87773a8f4ae617f41b1eb9c154b2905f7bd6"
-"checksum notcurses 1.4.2 (registry+https://github.com/rust-lang/crates.io-index)" = "d4e4c5f8705f30a04a3979410ad798a8edc183f9ca2b9183f79f4964f32452d5"
+"checksum notcurses 1.5.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1e2c17bae6361297ebca2846b966a9421061620cee5efd86fc25f6b7d534c8e9"
 "checksum parking_lot 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)" = "92e98c49ab0b7ce5b222f2cc9193fc4efe11c6d0bd4f648e374684a6857b1cfc"
 "checksum parking_lot_core 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7582838484df45743c8434fbff785e8edf260c28748353d44bc0da32e0ceabf1"
 "checksum peeking_take_while 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = "19b17cddbe7ec3f8bc800887bab5e717348c95ea2ca0b1bf0837fb964dc67099"
