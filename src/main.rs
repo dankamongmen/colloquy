@@ -8,8 +8,18 @@ extern {
 fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
     unsafe{
         let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
-        ffi::ncplane_double_box(p, 0, 0, dimy - 1, dimx - 1, 0);
-        ffi::ncplane_putstr(p, text);
+        let mut ul = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut ur = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut bl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut br = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut hl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut vl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        ffi::cells_rounded_box(p, 0, 0, &mut ul, &mut ur, &mut bl, &mut br, &mut hl, &mut vl);
+        ffi::ncplane_perimeter(p, &ul, &ur, &bl, &br, &hl, &vl, 0);
+        let mut sbytes = 0;
+        let mut _cols = ffi::ncplane_puttext(p, 0, ffi::ncalign_e_NCALIGN_LEFT,
+                            std::ffi::CString::new(text).expect("Bad string").as_ptr(),
+                            &mut sbytes);
     }
     notcurses::render(nc).expect("failed rendering");
 }
@@ -29,8 +39,7 @@ fn main() {
             margin_r: 8,
             margin_b: 8,
             margin_l: 8,
-            flags: (ffi::NCOPTION_INHIBIT_SETLOCALE |
-                    ffi::NCOPTION_NO_ALTERNATE_SCREEN) as u64,
+            flags: (ffi::NCOPTION_INHIBIT_SETLOCALE | ffi::NCOPTION_NO_ALTERNATE_SCREEN) as u64,
         };
         let nc = ffi::notcurses_init(&opts, libc_stdout());
         let stdplane = ffi::notcurses_stdplane(nc);
@@ -65,7 +74,7 @@ mod tests {
             let mut dimy = 0;
             let mut dimx = 0;
             let _stdplane = notcurses::stddim_yx(nc, &mut dimy, &mut dimx);
-            msgbox(nc, dimy, dimx, "This ought be centered");
+            msgbox(nc, dimy, dimx, "This box ought be centered");
             ffi::notcurses_stop(nc);
         }
     }
