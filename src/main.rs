@@ -62,7 +62,7 @@ fn main() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use serial_test_derive::serial; // serialize tests using notcurses
+    use serial_test::serial; // serialize tests using notcurses
 
     #[test]
     #[serial]
