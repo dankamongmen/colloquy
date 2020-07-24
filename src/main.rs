@@ -35,10 +35,10 @@ fn main() {
             loglevel: 0,
             termtype: std::ptr::null(),
             renderfp: std::ptr::null_mut(),
-            margin_t: 8,
-            margin_r: 8,
-            margin_b: 8,
-            margin_l: 8,
+            margin_t: 2,
+            margin_r: 2,
+            margin_b: 2,
+            margin_l: 2,
             flags: (ffi::NCOPTION_INHIBIT_SETLOCALE | ffi::NCOPTION_NO_ALTERNATE_SCREEN) as u64,
         };
         let nc = ffi::notcurses_init(&opts, libc_stdout());
