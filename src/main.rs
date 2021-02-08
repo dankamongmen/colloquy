@@ -30,7 +30,7 @@ fn main() {
 
     unsafe{
         let _ = libc::setlocale(libc::LC_ALL, std::ffi::CString::new("").unwrap().as_ptr());
-        let opts: ffi::notcurses_options = ffi::notcurses_options {
+        let opts: ffi::NotcursesOptions = ffi::NotcursesOptions {
             loglevel: 0,
             termtype: std::ptr::null(),
             renderfp: std::ptr::null_mut(),
