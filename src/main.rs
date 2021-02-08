@@ -7,12 +7,12 @@ extern {
 fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
     unsafe{
         let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
-        let mut ul = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut ur = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut bl = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut br = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut hl = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut vl = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut ul = ffi::NcCell { gcluster: 0, gcluster_backstop: 0, width: 0, stylemask: 0, channels: 0, };
+        let mut ur = ffi::NcCell { gcluster: 0, gcluster_backstop: 0, width: 0, stylemask: 0, channels: 0, };
+        let mut bl = ffi::NcCell { gcluster: 0, gcluster_backstop: 0, width: 0, stylemask: 0, channels: 0, };
+        let mut br = ffi::NcCell { gcluster: 0, gcluster_backstop: 0, width: 0, stylemask: 0, channels: 0, };
+        let mut hl = ffi::NcCell { gcluster: 0, gcluster_backstop: 0, width: 0, stylemask: 0, channels: 0, };
+        let mut vl = ffi::NcCell { gcluster: 0, gcluster_backstop: 0, width: 0, stylemask: 0, channels: 0, };
         ffi::cells_rounded_box(p, 0, 0, &mut ul, &mut ur, &mut bl, &mut br, &mut hl, &mut vl);
         ffi::ncplane_perimeter(p, &ul, &ur, &bl, &br, &hl, &vl, 0);
         let mut sbytes = 0;
