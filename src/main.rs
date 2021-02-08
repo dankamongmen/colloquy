@@ -1,4 +1,3 @@
-extern crate notcurses;
 extern crate libnotcurses_sys as ffi;
 
 extern {
@@ -8,12 +7,12 @@ extern {
 fn msgbox(nc: *mut ffi::notcurses, dimy: i32, dimx: i32, text: &str) {
     unsafe{
         let p = ffi::ncplane_new(nc, dimy, dimx, 0, 0, std::ptr::null_mut());
-        let mut ul = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut ur = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut bl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut br = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut hl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
-        let mut vl = ffi::cell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut ul = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut ur = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut bl = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut br = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut hl = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
+        let mut vl = ffi::nccell { gcluster: 0, attrword: 0, channels: 0, };
         ffi::cells_rounded_box(p, 0, 0, &mut ul, &mut ur, &mut bl, &mut br, &mut hl, &mut vl);
         ffi::ncplane_perimeter(p, &ul, &ur, &bl, &br, &hl, &vl, 0);
         let mut sbytes = 0;
@@ -53,7 +52,7 @@ fn main() {
             ffi::notcurses_stop(nc);
             std::process::exit(1);
         }
-        let mut ni: ffi::ncinput = std::mem::zeroed();
+        let mut ni: ffi::NcInput = std::mem::zeroed();
         notcurses::getc_blocking(nc, &mut ni);
         ffi::notcurses_stop(nc);
     }
